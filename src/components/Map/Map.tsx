@@ -21,6 +21,8 @@ interface Props {
 }
 
 const Map = ({ markers }: Props) => {
+  const [, setSize] = React.useState<number>(markers.size);
+
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.REACT_APP_API_KEY!,
@@ -32,18 +34,38 @@ const Map = ({ markers }: Props) => {
     let current: Node<TMarker> | null = markers.head;
 
     while (current) {
-      const id = `${current.val.lat}_${current.val.lng}`;
-      res.push(<LocationMarker position={current.val} key={id} />);
+      const key = `${current.val.lat}_${current.val.lng}`;
+      res.push(<LocationMarker position={current.val} key={key} />);
       current = current.next;
     }
 
     return res;
   };
 
+  const mapClickHandler = (loc: google.maps.MapMouseEvent) => {
+    const lat = loc.latLng?.lat();
+    const lng = loc.latLng?.lng();
+
+    if (lat && lng) {
+      // addMarker returns updated size
+      setSize(
+        markers.addMarker({
+          lng,
+          lat,
+        })
+      );
+    }
+  };
+
   return (
     <>
       {isLoaded ? (
-        <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10}>
+        <GoogleMap
+          onClick={mapClickHandler}
+          mapContainerStyle={containerStyle}
+          center={center}
+          zoom={10}
+        >
           {renderMarkers()}
         </GoogleMap>
       ) : (

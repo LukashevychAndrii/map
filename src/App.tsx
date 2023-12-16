@@ -12,11 +12,6 @@ function App() {
     lng: -38.523,
   });
 
-  markers.addMarker({
-    lat: -3.73,
-    lng: -38.5,
-  });
-
   console.log(markers);
   return <Map markers={markers} />;
 }
