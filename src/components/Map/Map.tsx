@@ -1,6 +1,7 @@
 import React from "react";
 
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
+import LocationMarker from "../Marker/LocationMarker";
 
 const containerStyle = {
   width: "90vw",
@@ -21,11 +22,9 @@ const Map = () => {
   return (
     <>
       {isLoaded ? (
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={center}
-          zoom={10}
-        ></GoogleMap>
+        <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10}>
+          <LocationMarker position={center} />
+        </GoogleMap>
       ) : (
         <p>Loading map...</p>
       )}
