@@ -1,9 +1,11 @@
 import React from "react";
 
+import { TMarker } from "../../App";
+
 import { MarkerF } from "@react-google-maps/api";
 
 interface Props {
-  position: google.maps.LatLng | google.maps.LatLngLiteral;
+  position: TMarker;
 }
 
 const LocationMarker = ({ position }: Props) => {
