@@ -25,7 +25,7 @@ const Map = ({ markers }: Props) => {
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: process.env.REACT_APP_API_KEY!,
+    googleMapsApiKey: process.env.REACT_APP_MAP_API_KEY!,
   });
 
   const renderMarkers = () => {
