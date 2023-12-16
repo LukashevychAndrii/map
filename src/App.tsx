@@ -7,12 +7,8 @@ import MarkerCollection from "./utils/MarkerCollection";
 export type TMarker = google.maps.LatLng | google.maps.LatLngLiteral;
 
 function App() {
-  const markers = new MarkerCollection({
-    lat: -3.745,
-    lng: -38.523,
-  });
+  const markers = new MarkerCollection();
 
-  console.log(markers);
   return <Map markers={markers} />;
 }
 
