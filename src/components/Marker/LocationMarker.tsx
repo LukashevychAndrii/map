@@ -6,10 +6,11 @@ import { MarkerF } from "@react-google-maps/api";
 
 interface Props {
   position: TMarker;
+  index: number;
 }
 
-const LocationMarker = ({ position }: Props) => {
-  return <MarkerF position={position} />;
+const LocationMarker = ({ position, index }: Props) => {
+  return <MarkerF options={{ label: String(index) }} position={position} />;
 };
 
 export default LocationMarker;

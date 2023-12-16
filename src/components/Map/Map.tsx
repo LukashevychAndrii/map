@@ -33,9 +33,16 @@ const Map = ({ markers }: Props) => {
 
     let current: Node<TMarker> | null = markers.head;
 
+    let index = 1;
+
     while (current) {
       const key = `${current.val.lat}_${current.val.lng}`;
-      res.push(<LocationMarker position={current.val} key={key} />);
+
+      res.push(
+        <LocationMarker key={key} position={current.val} index={index} />
+      );
+
+      index++;
       current = current.next;
     }
 
