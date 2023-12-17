@@ -81,7 +81,19 @@ const Map = ({ markers }: Props) => {
           {renderMarkers()}
         </GoogleMap>
       ) : (
-        <p>Loading map...</p>
+        <p
+          style={{
+            fontSize: "1.75rem",
+            fontWeight: 600,
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%,-50%)",
+            whiteSpace: "nowrap",
+          }}
+        >
+          Loading map...
+        </p>
       )}
     </>
   );
