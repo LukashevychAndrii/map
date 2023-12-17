@@ -1,8 +1,8 @@
 import React from "react";
 
-import { TMarker } from "../../App";
-
 import { MarkerF } from "@react-google-maps/api";
+
+import { TMarker } from "../types/MarkerType";
 
 interface Props {
   position: TMarker;

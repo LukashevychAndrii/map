@@ -1,16 +1,8 @@
-export class Node<T> {
-  public readonly val: T;
-  public next: Node<T> | null;
-
-  constructor(value: T) {
-    this.val = value;
-    this.next = null;
-  }
-}
+import { TNode } from "../components/types/NodeType";
 
 export abstract class LinkedList<T> {
-  public head: Node<T> | null;
-  public tail: Node<T> | null;
+  public head: TNode<T> | null;
+  public tail: TNode<T> | null;
   public size: number;
 
   constructor() {
@@ -19,12 +11,11 @@ export abstract class LinkedList<T> {
     this.size = 0;
   }
 
-  protected addNode(val: T) {
+  protected addNode(newNode: TNode<T>) {
     if (!this.size) {
-      this.head = new Node<T>(val);
+      this.head = newNode;
       this.tail = this.head;
     } else {
-      const newNode = new Node<T>(val);
       this.tail!.next = newNode;
       this.tail = newNode;
     }

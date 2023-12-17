@@ -2,9 +2,11 @@ import React from "react";
 
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import LocationMarker from "../Marker/LocationMarker";
+
 import MarkerCollection from "../../utils/MarkerCollection";
-import { TMarker } from "../../App";
-import { Node } from "../../utils/LinkedList";
+import { MarkerNode } from "../../utils/MarkerNode";
+import { TMarker } from "../types/MarkerType";
+import updateMarkersDB from "../../firebase/functions/updateMarkersDB";
 
 const containerStyle = {
   width: "90vw",
@@ -31,21 +33,22 @@ const Map = ({ markers }: Props) => {
   const renderMarkers = () => {
     const res: JSX.Element[] = [];
 
-    let current: Node<TMarker> | null = markers.head;
-
-    let index = 1;
+    let current: MarkerNode<TMarker> | null =
+      markers.head as MarkerNode<TMarker>;
 
     while (current) {
-      const key = `${current.val.lat}_${current.val.lng}`;
+      const key = `${current.location.lat}_${current.location.lng}`;
 
       res.push(
-        <LocationMarker key={key} position={current.val} index={index} />
+        <LocationMarker
+          key={key}
+          position={current.location}
+          index={current.quest_number}
+        />
       );
 
-      index++;
       current = current.next;
     }
-
     return res;
   };
 
@@ -61,6 +64,8 @@ const Map = ({ markers }: Props) => {
           lat,
         })
       );
+
+      updateMarkersDB(markers);
     }
   };
 
