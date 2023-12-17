@@ -4,6 +4,7 @@ import "./App.css";
 import Map from "./components/Map/Map";
 import MarkerCollection from "./utils/MarkerCollection";
 import getMarkersDB from "./firebase/functions/getMarkersDB";
+import { DataSnapshot } from "firebase/database";
 
 function App() {
   const [markers, setMarkers] = React.useState<MarkerCollection>(
@@ -12,8 +13,8 @@ function App() {
 
   React.useEffect(() => {
     const getData = async () => {
-      const data = await getMarkersDB();
-      if (data.exists()) {
+      const data = await getMarkersDB;
+      if (data instanceof DataSnapshot && data.exists()) {
         setMarkers(new MarkerCollection(data.val()));
       }
     };
