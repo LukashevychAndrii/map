@@ -9,8 +9,8 @@ import { TMarker } from "../types/MarkerType";
 import updateMarkersDB from "../../firebase/functions/updateMarkersDB";
 
 const containerStyle = {
-  width: "90vw",
-  height: "90vh",
+  width: "100vw",
+  height: "100vh",
 };
 
 const center = {
