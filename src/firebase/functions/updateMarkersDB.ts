@@ -24,6 +24,7 @@ const updateMarkers = (markers: MarkerCollection) => {
       const setPromise = set(ref(db, headPath), {
         location: (markers.tail! as MarkerNode<TMarker>).location,
         quest_number: (markers.tail! as MarkerNode<TMarker>).quest_number,
+        timestamp: (markers.tail! as MarkerNode<TMarker>).timestamp,
       });
 
       const updatePromise = update(ref(db, "/markers"), {
@@ -31,6 +32,7 @@ const updateMarkers = (markers: MarkerCollection) => {
         tail: {
           location: (markers.tail! as MarkerNode<TMarker>).location,
           quest_number: (markers.tail! as MarkerNode<TMarker>).quest_number,
+          timestamp: (markers.tail! as MarkerNode<TMarker>).timestamp,
         },
       });
 
