@@ -15,7 +15,8 @@ function App() {
     const getData = async () => {
       const data = await getMarkersDB;
       if (data instanceof DataSnapshot && data.exists()) {
-        setMarkers(new MarkerCollection(data.val()));
+        const markersCollection = new MarkerCollection().craete(data.val());
+        setMarkers(markersCollection);
       }
     };
     getData();

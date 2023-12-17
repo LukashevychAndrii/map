@@ -4,21 +4,6 @@ import { TMarker } from "../components/types/MarkerType";
 import { MarkerNode } from "./MarkerNode";
 
 class MarkerCollection extends LinkedList<TMarker> {
-  constructor(markers?: MarkerCollection) {
-    super();
-
-    // Some fields could be "falsy" so firebase will not include them
-    if (markers && markers.size && markers.head && markers.tail) {
-      this.head = markers.head;
-      this.tail = markers.tail;
-      this.size = markers.size;
-    } else {
-      this.head = null;
-      this.tail = null;
-      this.size = 0;
-    }
-  }
-
   public addMarker(newMarker: TMarker) {
     const newMarkerNode = new MarkerNode(newMarker, this.size + 1);
     return this.addNode(newMarkerNode);
@@ -32,6 +17,25 @@ class MarkerCollection extends LinkedList<TMarker> {
     }
 
     return path;
+  }
+
+  public craete(data: MarkerCollection) {
+    let head: MarkerNode<TMarker> | null = data.head as MarkerNode<TMarker>;
+    const newHead = new MarkerNode(head.location, head.quest_number);
+
+    let current = newHead;
+
+    while (head) {
+      current.next = new MarkerNode(head.location, head.quest_number);
+      current = current.next;
+      head = head.next;
+    }
+
+    this.head = newHead.next;
+    this.tail = current;
+
+    this.size = data.size;
+    return this;
   }
 }
 
